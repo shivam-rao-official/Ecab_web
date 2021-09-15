@@ -5,8 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfirmBookScreens extends StatefulWidget {
   var tripId;
+  var empId;
 
-  ConfirmBookScreens({this.tripId});
+  ConfirmBookScreens({this.tripId, this.empId});
   @override
   _ConfirmBookScreensState createState() => _ConfirmBookScreensState();
 }
@@ -31,19 +32,11 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
       });
   }
 
-  Future getEmpId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      confirmedBy = prefs.getString('EmpId');
-    });
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getTripData();
-    getEmpId();
   }
 
   final _key = GlobalKey<FormState>();
@@ -55,168 +48,187 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
         title: Text(
           "TRIP DETAILS",
           style: TextStyle(
-            color: Colors.black,
             fontWeight: FontWeight.w900,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(Icons.arrow_back),
-          color: Colors.black,
         ),
       ),
-      body: Form(
-        key: _key,
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                tripConfirmText("From", origin, context),
-                SizedBox(
-                  height: 5,
-                ),
-                tripConfirmText("Destination", dest, context),
-                SizedBox(
-                  height: 5,
-                ),
-                tripConfirmText("Vehicle Type", vehicleType, context),
-                SizedBox(
-                  height: 5,
-                ),
-                Card(
-                  elevation: 10,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Vehicle Number",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              onChanged: (val) {
-                                vehicleNum = val;
-                              },
-                              onSaved: (val) {
-                                vehicleNum = val;
-                              },
-                              // ignore: missing_return
-                              validator: (val) {
-                                if (val.isEmpty)
-                                  return 'Vehicle Number is Required';
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Center(
+          child: Container(
+            width: MediaQuery.of(context).size.width / 2 + 40,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xff003566),
+                    spreadRadius: 3,
+                    blurRadius: 8,
                   ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Card(
-                  elevation: 10,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Driver's Number",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              onChanged: (val) {
-                                driverNum = val;
-                              },
-                              onSaved: (val) {
-                                driverNum = val;
-                              },
-                              // ignore: missing_return
-                              validator: (val) {
-                                if (val.isEmpty)
-                                  return 'Driver Number is Required';
-                                if (val.length < 10 && val.length > 10)
-                                  return 'Enter a valid Number';
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                ]),
+            child: SingleChildScrollView(
+              child: Form(
+                key: _key,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    tripConfirmText("From", origin, context),
+                    SizedBox(
+                      height: 5,
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                isSubmit
-                    ? CircularProgressIndicator()
-                    : MaterialButton(
+                    tripConfirmText("Destination", dest, context),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    tripConfirmText("Vehicle Type", vehicleType, context),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Card(
+                      elevation: 10,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 15.0,
-                            bottom: 15.0,
-                            right: 40,
-                            left: 40,
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  "Vehicle Number",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 70,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  onChanged: (val) {
+                                    vehicleNum = val;
+                                  },
+                                  onSaved: (val) {
+                                    vehicleNum = val;
+                                  },
+                                  // ignore: missing_return
+                                  validator: (val) {
+                                    if (val.isEmpty)
+                                      return 'Vehicle Number is Required';
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                          child: Text(
-                            "CONFIRM BOOKING",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Card(
+                      elevation: 10,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  "Driver's Number",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 70,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  onChanged: (val) {
+                                    driverNum = val;
+                                  },
+                                  onSaved: (val) {
+                                    driverNum = val;
+                                  },
+                                  // ignore: missing_return
+                                  validator: (val) {
+                                    if (val.isEmpty)
+                                      return 'Driver Number is Required';
+                                    if (val.contains(RegExp(r'[a-z]')) ||
+                                        val.contains(RegExp(r'[A-Z]')))
+                                      return "Number contains invalid character";
+                                    if (val.length < 10 || val.length > 10)
+                                      return 'Enter a valid Number';
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    isSubmit
+                        ? CircularProgressIndicator()
+                        : Padding(
+                            padding: const EdgeInsets.only(bottom: 30.0),
+                            child: MaterialButton(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 15.0,
+                                  bottom: 15.0,
+                                  right: 40,
+                                  left: 40,
+                                ),
+                                child: Text(
+                                  "CONFIRM BOOKING",
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              color: Color(0xfff2400FF),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              onPressed: () {
+                                if (_key.currentState.validate()) {
+                                  // confirmBooking();
+                                }
+                              },
                             ),
                           ),
-                        ),
-                        color: Color(0xfff2400FF),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        onPressed: () {
-                          if (_key.currentState.validate()) {
-                            confirmBooking();
-                          }
-                        },
-                      ),
-              ],
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -233,7 +245,7 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
         data: {
           "vehicleNum": vehicleNum,
           "driverNum": driverNum,
-          "confirmedBy": confirmedBy,
+          "confirmedBy": widget.empId,
           "confirmed": true,
         });
     setState(() {
@@ -268,6 +280,8 @@ class _ConfirmBookScreensState extends State<ConfirmBookScreens> {
                   TextButton(
                     child: Text("Proceed"),
                     onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                       Navigator.of(context).pushReplacementNamed('/admin');
                     },
                   ),

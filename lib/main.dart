@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gmaps_demo/Screens/Admin/demo.dart';
 import 'package:gmaps_demo/Screens/Admin/homecreen.dart';
+import 'package:gmaps_demo/Screens/Admin/reports.dart';
 import 'package:gmaps_demo/Screens/Login/loginScreen.dart';
-import 'package:gmaps_demo/Screens/SignUp/signup.dart';
 import 'package:gmaps_demo/Screens/User/bookingPage.dart';
 import 'package:gmaps_demo/Screens/User/homecreen.dart';
 import 'package:gmaps_demo/Screens/User/splash.dart';
 import 'package:gmaps_demo/Screens/User/splash2.dart';
 import 'package:gmaps_demo/Screens/User/tripSummary.dart';
+import 'package:gmaps_demo/Screens/accounts.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,22 +26,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'The Mission e-Cab',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xff003566),
+        buttonColor: Color(0xffffd60a),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Color(0xffffd60a),
+          elevation: 20,
+          splashColor: Color(0xffffc300),
+        ),
+        appBarTheme: AppBarTheme(
+          color: Color(0xff003566),
+        ),
         iconTheme: IconThemeData(color: Colors.black),
       ),
       routes: <String, WidgetBuilder>{
         '/splash2': (BuildContext ctxt) => Splash2(),
         '/login': (BuildContext ctxt) => LoginScreen(),
-        '/signup': (BuildContext ctxt) => SignupScreen(),
         '/home': (BuildContext ctxt) => HomeScreen(),
         '/bookTrip': (BuildContext ctxt) => TripBooking(),
         '/tripSummary': (BuildContext ctxt) => TripSummary(),
+        '/account': (BuildContext ctxt) => AccountScreen(),
+        // ADMIN ROUTES
         '/admin': (BuildContext ctxt) => AdminHomeScreen(),
+        '/report': (BuildContext ctxt) => Reports(),
       },
-      home: Splash(),
+      home: Splash2(),
     );
   }
 }

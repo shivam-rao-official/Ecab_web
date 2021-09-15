@@ -26,6 +26,8 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.3
+  intl: ^0.17.0
+  pdf: ^3.6.0
   shared_preferences: ^2.0.6
 
 dev_dependencies:
@@ -44,6 +46,17 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/taxi.png
+    - assets/icons/sport-car.png
+    - assets/icons/ambulance.png
+    - assets/icons/data.png
+    - assets/icons/positive-vote.png
+    - assets/icons/help.png
+    - assets/icons/confirmation.png
+    - assets/image/Mission pic.jpg
+    - assets/image/missionLogoOpacity50.png
+    - assets/image/missionlogo420.png
+    - assets/icons/monitor.png
+    - assets/icons/exit.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

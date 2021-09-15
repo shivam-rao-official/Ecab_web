@@ -5,15 +5,15 @@ Widget customLoginButton(BuildContext context) {
   return MaterialButton(
     child: Padding(
       padding: const EdgeInsets.only(
-        top: 15.0,
-        bottom: 15.0,
+        top: 10.0,
+        bottom: 10.0,
         right: 40,
         left: 40,
       ),
       child: Text(
         "LOGIN",
         style: TextStyle(
-          fontSize: 25,
+          fontSize: MediaQuery.of(context).size.width / 10,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
