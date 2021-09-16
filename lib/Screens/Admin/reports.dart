@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:gmaps_demo/Widgets/Report/tableData.dart';
 import 'package:gmaps_demo/Widgets/Report/tableHeading.dart';
+import 'package:intl/intl.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class Reports extends StatelessWidget {
   @override
@@ -93,6 +95,9 @@ class Reports extends StatelessWidget {
         },
         future: retrieveData(),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+      ),
     );
   }
 
@@ -104,6 +109,21 @@ class Reports extends StatelessWidget {
     return res.data["msg"];
   }
 }
+
+// final pdf = pw.Document();
+// openPdf() {
+//   pdf.addPage(
+//     pw.Page(
+//       build: (context) {
+//         return pw.Header(
+//           level: 1,
+//           child: pw.Text("Header"),
+//         );
+//       },
+//     ),
+//   );
+// }
+
 
 /**
  * ListTile(

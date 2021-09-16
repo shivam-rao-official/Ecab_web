@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset('assets/image/Mission pic.jpg'),
+          // Image.asset('assets/image/Mission pic.jpg'),
           Padding(
             padding: const EdgeInsets.only(bottom: 30.0),
             child: Center(
