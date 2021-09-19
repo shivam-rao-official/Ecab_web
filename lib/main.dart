@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gmaps_demo/Screens/Admin/demo.dart';
 import 'package:gmaps_demo/Screens/Admin/homecreen.dart';
 import 'package:gmaps_demo/Screens/Admin/reports.dart';
 import 'package:gmaps_demo/Screens/Login/loginScreen.dart';
 import 'package:gmaps_demo/Screens/User/bookingPage.dart';
 import 'package:gmaps_demo/Screens/User/homecreen.dart';
-import 'package:gmaps_demo/Screens/User/splash.dart';
 import 'package:gmaps_demo/Screens/User/splash2.dart';
 import 'package:gmaps_demo/Screens/User/tripSummary.dart';
 import 'package:gmaps_demo/Screens/accounts.dart';
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'The Mission e-Cab',
+      title: 'Mission Cab',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xff003566),
